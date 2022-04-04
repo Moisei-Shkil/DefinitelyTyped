@@ -1599,3 +1599,10 @@ management.getDeviceCredentials({ user_id: 'user_id' }, (err, deviceCredentials)
 
 management.deleteDeviceCredential({ id: 'id' }).then(() => {});
 management.deleteDeviceCredential({ id: 'id' }, err => {});
+
+/**
+ * Users
+ */
+management.users.getUserOrganizations((err, organizations: auth0.Organization[]) => {
+    console.log({ organizations });
+});

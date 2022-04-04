@@ -1472,6 +1472,8 @@ export class OrganizationsManager {
 export class ManagementClient<A = AppMetadata, U = UserMetadata> {
     organizations: OrganizationsManager;
 
+    users: UsersManager;
+
     constructor(options: ManagementClientOptions);
 
     getClientInfo(): ClientInfo;
@@ -1904,4 +1906,13 @@ export class UsersManager<A = AppMetadata, U = UserMetadata> {
 
     impersonate(userId: string, settings: ImpersonateSettingOptions): Promise<any>;
     impersonate(userId: string, settings: ImpersonateSettingOptions, cb: (err: Error, data: any) => void): void;
+
+    getUserOrganizations(): Promise<Organization[]>;
+    getUserOrganizations(cb: (err: Error, organizations: Organization[]) => void): void;
+    getUserOrganizations(params: PagingOptions & { include_totals?: false; }): Promise<Organization[]>;
+    getUserOrganizations(params: PagingOptions & { include_totals: true; }): Promise<OrganizationsPaged>;
+    getUserOrganizations(params: PagingOptions & { include_totals?: false; }, cb: (err: Error, organizations: Organization[]) => void): void;
+    getUserOrganizations(params: PagingOptions & { include_totals: true; }, cb: (err: Error, pagedOrganizations: OrganizationsPaged) => void): void;
+    getUserOrganizations(params: CheckpointPagingOptions): Promise<Organization[]>;
+    getUserOrganizations(params: CheckpointPagingOptions, cb: (err: Error, organizations: Organization[]) => void): void;
 }
